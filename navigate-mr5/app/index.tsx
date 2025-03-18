@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Pressable, Text, TextInput, View } from "react-native";
-import { Stack, useNavigation } from 'expo-router';
+import { Stack, useLocalSearchParams, useNavigation } from 'expo-router';
 
 function submit() {
 	
@@ -13,10 +13,12 @@ export default function Index() {
     navigation.setOptions({ headerShown: false });
   }, [navigation]);
 	
-	const { urlCurrentLocation } = useLocalSearchParams<{ currentLocation? : string }>();
+	const { urlCurrentLocation } = useLocalSearchParams<{ name: string, currentLocation? : string }>();
 	
 	const [currentLocation, updateCurrentLocation] = useState(urlCurrentLocation);
 	const [destination, updateDestination] = useState('');
+	
+	console.log(urlCurrentLocation, currentLocation);
 	
   return (
     <View
@@ -29,7 +31,8 @@ export default function Index() {
 			<TextInput 
 				style={{ borderWidth: 1, padding: 10, margin: 10, width: 300 }}
 				placeholder='Enter current location' placeholderTextColor='#999'
-				onChangeText={ updateCurrentLocation } onSubmitEditing={ submit } />
+				onChangeText={ updateCurrentLocation } onSubmitEditing={ submit }
+				value={ urlCurrentLocation } />
 			<TextInput 
 				style={{ borderWidth: 1, padding: 10, margin: 10, width: 300 }}
 				placeholder='Enter destination' placeholderTextColor='#999'
