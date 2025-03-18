@@ -13,12 +13,12 @@ export default function Index() {
     navigation.setOptions({ headerShown: false });
   }, [navigation]);
 	
-	const { urlCurrentLocation } = useLocalSearchParams<{ name: string, currentLocation? : string }>();
+	const local = useLocalSearchParams();
 	
-	const [currentLocation, updateCurrentLocation] = useState(urlCurrentLocation);
+	const [currentLocation, updateCurrentLocation] = useState(local.currentLocation);
 	const [destination, updateDestination] = useState('');
 	
-	console.log(urlCurrentLocation, currentLocation);
+	console.log(local);
 	
   return (
     <View
@@ -32,7 +32,7 @@ export default function Index() {
 				style={{ borderWidth: 1, padding: 10, margin: 10, width: 300 }}
 				placeholder='Enter current location' placeholderTextColor='#999'
 				onChangeText={ updateCurrentLocation } onSubmitEditing={ submit }
-				value={ urlCurrentLocation } />
+				value={ currentLocation } />
 			<TextInput 
 				style={{ borderWidth: 1, padding: 10, margin: 10, width: 300 }}
 				placeholder='Enter destination' placeholderTextColor='#999'
