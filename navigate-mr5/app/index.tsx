@@ -13,8 +13,11 @@ export default function Index() {
     navigation.setOptions({ headerShown: false });
   }, [navigation]);
 	
- const [currentLocation, updateCurrentLocation] = useState('');
- const [destination, updateDestination] = useState('');
+	const { urlCurrentLocation } = useLocalSearchParams<{ currentLocation? : string }>();
+	
+	const [currentLocation, updateCurrentLocation] = useState(urlCurrentLocation);
+	const [destination, updateDestination] = useState('');
+	
   return (
     <View
       style={{
