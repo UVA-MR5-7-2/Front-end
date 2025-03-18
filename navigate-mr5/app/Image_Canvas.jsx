@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
-import cv from 'opencv.js';  // OpenCV.js
+import cv from "@techstark/opencv-js"
 
 const ImageCanvas = ({ setNodes, setGraph }) => {
+/*
   const canvasRef = useRef(null);
   const [image, setImage] = useState(null);
 
@@ -77,7 +78,7 @@ const ImageCanvas = ({ setNodes, setGraph }) => {
       <button onClick={processImage}>Process Image</button>
       <canvas ref={canvasRef} />
     </div>
-  );
+  );*/
 };
 
 export default ImageCanvas;
