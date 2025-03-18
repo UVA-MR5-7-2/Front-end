@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ImageCanvas from './ImageCanvas';
-import GraphComponent from './GraphComponent';
+import ImageCanvas from './Image_Canvas';
+import GraphComponent from './Graph';
 
 const App = () => {
   const [nodes, setNodes] = useState([]);
