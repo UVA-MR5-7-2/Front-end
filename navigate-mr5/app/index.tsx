@@ -20,7 +20,7 @@ export default function Index() {
 	
 	const [errorMessage, setErrorMessage] = useState('');
 
-	// send the user to the graphing algorithm
+	// send the user to the graphing algorithm and handle poor inputs from the user
 	function submit() {
 		if (!locations.includes(selectedDestination) || selectedDestination === locations[0]) {
 			setErrorMessage("Please choose a destination");
@@ -32,6 +32,7 @@ export default function Index() {
 			router.push("/map?currentLocation=" + selectedLocation + "&destination=" + selectedDestination);
 		} else {
 			setErrorMessage("Something went wrong... :(");
+			// Send error data to backend 
 		}
 	}
 	
