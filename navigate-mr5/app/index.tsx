@@ -1,78 +1,82 @@
+// import components we need from react and expo
 import { useEffect, useState } from 'react';
-import { FlatList, Pressable, Text, TextInput, View } from "react-native";
-import { Stack, useLocalSearchParams, useNavigation } from 'expo-router';
-
-const DATA = ['First Item','Second Item','Third Item',1,2,3,4,5,5,6];
-
-let filteredData = [];
+import { Button, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { router, Stack, useLocalSearchParams, useNavigation } from 'expo-router';
+import { Picker } from '@react-native-picker/picker';
 
 export default function Index() {
+	// hide the expo header
   const navigation = useNavigation();
-
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
   }, [navigation]);
-	
-	const local = useLocalSearchParams();
 
-	let [showItems, setShowItems] = useState(false);
-		
-	const [currentLocation, updateCurrentLocation] = useState(local.currentLocation || '');
-	const [destination, updateDestination] = useState('');
-
+	// send the user to the graphing algorithm
 	function submit() {
-		
+		router.push("/map?currentLocation=" + selectedLocation + "&destination=" + selectedDestination)
 	}
 	
-	function filterData(newLocation) {
-		filteredData = DATA.filter(v => v.toString().toLowerCase().includes(newLocation.toLowerCase()));
-	}
+	// variables for the user to choose their current location and destination
+	const local = useLocalSearchParams();
+	const [selectedLocation, updateLocation] = useState(local.currentLocation || '');
+	const [selectedDestination, updateDestination] = useState('');
 
-	function currentLocationChanged(newLocation) {
-		filterData(newLocation);
-		updateCurrentLocation(newLocation);
-	}
+	const locations = ['MR4 Entrance', 'MR6 Entrance', 'Pinn Hall Entrance', 'Lane Road Entrance', 'Atrium', 'Second floor entrance', 'First floor entrance', 'Labs entrance', 'Classroom', 'Restroom', 'BME Faculty Office'];
 	
-	function showList() {
-		filterData(currentLocation);
-		setShowItems(true);
-	}
-	
-	function hideList() {
-		setShowItems(false);
-	}
-	
+	// create the layout
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-				gap: 20
-      }}>
-      <Text style={{ fontSize: 30, marginTop: -200 }} >Navigate MR5 (BME Labs and Classroom)</Text>
-			<View style={{height: 200, zIndex: 2}}>
-				<Text style= {{ padding: 10 }} >Current Location</Text>
-				<TextInput 
-					style={{ borderWidth: 1, padding: 10, margin: 0, width: 300 }}
-					placeholder='Enter current location' placeholderTextColor='#999'
-					onChangeText={ currentLocationChanged } onSubmitEditing={ submit }
-					value={ currentLocation }
-					onFocus={ showList }
-					onBlur={ hideList } />
-					{showItems ? 
-					<FlatList style={{ margin: 0, padding: 0, backgroundColor: 'white', borderWidth: 5, borderColor: 'white',flexGrow: 0, }} contentContainerStyle={{ alignItems: "center", gap: 10 }}
-						data={filteredData}
-						renderItem={({item}) => <Text>{item}</Text>}
-						ListEmptyComponent=<Text>Nothing found</Text> /> : null}
+    <View style={ styles.container }>
+      <Text style={ styles.title }>Navigate MR5</Text>
+			<View style={ styles.PickerContainer }>
+				<Text style={ styles.PickerLabel }>Current Location</Text>
+				<Picker style={ styles.Picker} selectedValue={ selectedLocation } onValueChange={ (location, index) => updateLocation(location) } >
+					{locations.map(location => <Picker.Item label={location} value={location}/>)}
+				</Picker> 
 			</View>
-			<TextInput 
-				style={{ borderWidth: 1, padding: 10, marginTop: -110, width: 300 }}
-				placeholder='Enter destination' placeholderTextColor='#999'
-				onChangeText={ updateDestination } onSubmitEditing={ submit } />
-				<Pressable style={ ({pressed}) => [{ backgroundColor: 'lightblue', borderRadius: 3, borderColor: pressed ? 'white' : 'lightblue', borderWidth: 1 }] } onPress={ submit } >
-					<Text style={{ marginLeft: 20, marginRight: 20, marginBottom: 10, marginTop: 10, fontSize: 20 }}>Login</Text>
-				</Pressable>
+			<View style={ styles.PickerContainer }>
+				<Text style= { styles.PickerLabel }>Current Location</Text>
+				<Picker style={ styles.Picker} selectedValue={ selectedDestination } onValueChange={ (location, index) => updateDestination(location) } >
+					{locations.map(location => <Picker.Item label={location} value={location}/>)}
+				</Picker> 
+			</View>
+			<Pressable style={ ({pressed}) => pressed ? styles.buttonPressed : styles.button } onPress={ submit } >
+				<Text style={{ marginLeft: 20, marginRight: 20, marginBottom: 10, marginTop: 10, fontSize: 20, color: 'white' }}>Find</Text>
+			</Pressable>
     </View>
   );
 }
+
+// make it pretty
+const styles = StyleSheet.create({
+  container: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+		gap: 30
+	},
+  title: { 
+		fontSize: 40, 
+		textAlign: 'center' 
+	},
+  PickerContainer: {
+		gap: 2,
+		alignItems	: 'center'
+	},
+  PickerLabel: {
+		padding: 10,
+		fontSize: 20
+	},
+	Picker: {
+		fontSize: 20
+	},
+	button: {
+		backgroundColor: '#2196F3',
+		borderRadius: 3,
+		margin: 20
+	},
+	buttonPressed: {
+		backgroundColor: '#55aef7',
+		borderRadius: 3,
+		margin: 20
+	}
+});
