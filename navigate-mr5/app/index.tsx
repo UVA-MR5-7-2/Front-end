@@ -10,18 +10,30 @@ export default function Index() {
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
   }, [navigation]);
-
-	// send the user to the graphing algorithm
-	function submit() {
-		router.push("/map?currentLocation=" + selectedLocation + "&destination=" + selectedDestination)
-	}
 	
 	// variables for the user to choose their current location and destination
 	const local = useLocalSearchParams();
 	const [selectedLocation, updateLocation] = useState(local.currentLocation || '');
 	const [selectedDestination, updateDestination] = useState('');
 
-	const locations = ['MR4 Entrance', 'MR6 Entrance', 'Pinn Hall Entrance', 'Lane Road Entrance', 'Atrium', 'Second floor entrance', 'First floor entrance', 'Labs entrance', 'Classroom', 'Restroom', 'BME Faculty Office'];
+	const locations = ['Select one', 'MR4 Entrance', 'MR6 Entrance', 'Pinn Hall Entrance', 'Lane Road Entrance', 'Atrium', 'Second floor entrance', 'First floor entrance', 'Labs entrance', 'Classroom', 'Restroom', 'BME Faculty Office'];
+	
+	const [errorMessage, setErrorMessage] = useState('');
+
+	// send the user to the graphing algorithm
+	function submit() {
+		if (!locations.includes(selectedDestination) || selectedDestination === locations[0]) {
+			setErrorMessage("Please choose a destination");
+		} else if (!locations.includes(selectedLocation) || selectedLocation === locations[0]) {
+			setErrorMessage("Please choose your current location");
+		} else if (selectedDestination === selectedLocation) {
+			setErrorMessage("Location and destination should be different");
+		} else if (locations.includes(selectedLocation) && locations.includes(selectedDestination) && selectedLocation !== locations[0] && selectedDestination !== locations[0]) {
+			router.push("/map?currentLocation=" + selectedLocation + "&destination=" + selectedDestination);
+		} else {
+			setErrorMessage("Something went wrong... :(");
+		}
+	}
 	
 	// create the layout
   return (
@@ -34,14 +46,15 @@ export default function Index() {
 				</Picker> 
 			</View>
 			<View style={ styles.PickerContainer }>
-				<Text style= { styles.PickerLabel }>Current Location</Text>
-				<Picker style={ styles.Picker} selectedValue={ selectedDestination } onValueChange={ (location, index) => updateDestination(location) } >
+				<Text style= { styles.PickerLabel }>Destination</Text>
+				<Picker style={ styles.Picker } selectedValue={ selectedDestination } onValueChange={ (location, index) => updateDestination(location) } >
 					{locations.map(location => <Picker.Item label={location} value={location}/>)}
 				</Picker> 
 			</View>
 			<Pressable style={ ({pressed}) => pressed ? styles.buttonPressed : styles.button } onPress={ submit } >
-				<Text style={{ marginLeft: 20, marginRight: 20, marginBottom: 10, marginTop: 10, fontSize: 20, color: 'white' }}>Find</Text>
+				<Text style={ styles.buttonText }>Find</Text>
 			</Pressable>
+			<Text style={ styles.error }>{errorMessage}</Text>
     </View>
   );
 }
@@ -78,5 +91,16 @@ const styles = StyleSheet.create({
 		backgroundColor: '#55aef7',
 		borderRadius: 3,
 		margin: 20
-	}
+	},
+	buttonText: {
+		fontSize: 20,
+		color: 'white',
+		marginVertical: 10,
+		marginHorizontal: 20,
+	},
+  error: {
+		padding: 10,
+		fontSize: 20,
+		color: 'red'
+	},
 });
