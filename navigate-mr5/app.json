@@ -36,7 +36,7 @@
     ],
     "experiments": {
       "typedRoutes": true,
-      "baseUrl": "/navigate-mr5/dist"
+      "baseUrl": "/Front-end/navigate-mr5/dist"
     }
   }
 }
