@@ -1,20 +1,22 @@
-Foyer: 127 136
-West Bathroom: 226 99
-Hall Intersection (Floor 1): 247 125
-Classsroom 1041: 271 99
-Kubelick/Space & Griffin Lab: 283 232
-Sheybani/French/Abebayehu Lab: 280 397
-Christ Labs: 281 483
-East Bathroom: 337 553
+Foyer - (291,306)
+West Bathroom - (557, 284)
+Classroom/lounge - (606, 227)
+Kubelick Lab - (633, 521)
+Sneybani Lab - (631, 887)
+Christ Lab 1 - (631, 1077)
+East Bathroom - (753, 1232)
 
-Atrium/Office/Classroom 2005: 565 126
-West Bathroom: 636 99
-Hall Intersection (Floor 2): 658 125
-Papin Lab 1/Meyer Lab: 680 100
-Papin Lab 2/Price Lab 1: 666 231
-Saucerman Labs/Peirce-Cottler Lab 2: 690 231
-Zunder Lab/Price Lab 2/Barker Lab: 667 359
-Fallahi-Sachini Labs/Janes Lab 1: 691 358
-Lazzara Labs/Peirce-Cottler Lab 1: 668 478
-Blemker Lab/Epstein Lab/Janes Lab 2: 691 478
-East Bathroom: 749, 555
+Pinn Entrance - (1123, 132)
+Classroom - (1049, 272)
+Atrium - (1146, 307)
+Office - (1221, 254)
+Library - (1303, 286)
+West Bathroom - (1464,207)
+Papin Lab - (1516, 229)
+Saucerman Lab 1 - (1539, 52)
+Papin Lab 2 - (1486, 519)
+Fallahi-Sachini Lab 2 - (1541,799)
+zunder lab - (1489, 801)
+Blemker Lab - (1536, 1066)
+Lazzara Lab 1 - (1487, 1072)
+East Bathroom - (1666, 1236)
