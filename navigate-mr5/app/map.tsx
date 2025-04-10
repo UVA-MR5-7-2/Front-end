@@ -39,7 +39,7 @@ export default function Map() {
 				{/*
       <ImageCanvas setNodes={setNodes} setGraph={setGraph} />
 				{graph && <GraphComponent nodes={nodes} graph={graph} />}*/}
-			<Svg height="1000" width="1000" viewBox="0 0 100 100">
+			<Svg height="1000" width="1000" viewBox="0 25 100 100">
 			  <Image
 					x="-12.5%"
 					y="0"
