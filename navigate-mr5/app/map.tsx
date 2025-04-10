@@ -1,8 +1,8 @@
 // import components we need from react and expo
 import { useEffect, useState } from 'react';
-import { Button, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Button, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import Svg, { Image } from 'react-native-svg';
 import { router, Stack, useLocalSearchParams, useNavigation, useRootNavigationState } from 'expo-router';
-import { Picker } from '@react-native-picker/picker';
 import ImageCanvas from './Image_Canvas';
 import GraphComponent from './Graph';
 
@@ -30,13 +30,26 @@ export default function Map() {
   const [graph, setGraph] = useState(null);
 
   return (
-    <View style={ styles.container }>
-      <Text style={ styles.title }>Navigate MR5: Map</Text>
-			<Text>Current Location: {location}</Text>
-			<Text>Destination: {destination}</Text>
+    <ScrollView contentContainerStyle={ styles.container }>
+			<View>
+				<Text style={ styles.title }>Navigate MR5: Map</Text>
+				<Text style={ styles.text }>Current Location: {location}</Text>
+				<Text style={ styles.text }>Destination: {destination}</Text>
+			</View>
+				{/*
       <ImageCanvas setNodes={setNodes} setGraph={setGraph} />
-      {graph && <GraphComponent nodes={nodes} graph={graph} />}
-    </View>
+				{graph && <GraphComponent nodes={nodes} graph={graph} />}*/}
+			<Svg height="1000" width="1000" viewBox="0 0 100 100">
+			  <Image
+					x="-12.5%"
+					y="0"
+					width="125%"
+					height="125%"
+					href={require('./blueprint.png')}
+					clipPath="url(#clip)"
+				/>
+			</Svg>
+    </ScrollView>
   );
 }
 
@@ -44,44 +57,16 @@ export default function Map() {
 const styles = StyleSheet.create({
   container: {
 		flex: 1,
-		justifyContent: "center",
 		alignItems: "center",
 		gap: 30
 	},
   title: { 
 		fontSize: 40, 
-		textAlign: 'center' 
+		margin: 40
 	},
-  PickerContainer: {
-		gap: 2,
-		alignItems	: 'center'
-	},
-  PickerLabel: {
-		padding: 10,
+	text: {
+		textAlign: 'center', 
+		margin: 10,
 		fontSize: 20
-	},
-	Picker: {
-		fontSize: 20
-	},
-	button: {
-		backgroundColor: '#2196F3',
-		borderRadius: 3,
-		margin: 20
-	},
-	buttonPressed: {
-		backgroundColor: '#55aef7',
-		borderRadius: 3,
-		margin: 20
-	},
-	buttonText: {
-		fontSize: 20,
-		color: 'white',
-		marginVertical: 10,
-		marginHorizontal: 20,
-	},
-  error: {
-		padding: 10,
-		fontSize: 20,
-		color: 'red'
 	},
 });
