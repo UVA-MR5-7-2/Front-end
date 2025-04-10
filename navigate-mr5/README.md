@@ -1,5 +1,5 @@
 # TODO
-Implement [SVG?](https://docs.expo.dev/versions/latest/sdk/svg/) + [SVGR?](https://react-svgr.com/playground/?native=true&typescript=true) + [React Native SVG?](https://github.com/software-mansion/react-native-svg#with-react-native-cli) + [graphlib](https://www.npmjs.com/package/graphlib) + [opencv](https://www.npmjs.com/package/@techstark/opencv-js)
+Implement [SVGR?](https://react-svgr.com/) + [React Native SVG](https://github.com/software-mansion/react-native-svg#with-react-native-cli) + [graphlib](https://www.npmjs.com/package/graphlib) 
 
 # Welcome to your Expo app 👋
 
