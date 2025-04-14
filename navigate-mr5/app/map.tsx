@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Button, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import Svg, { Image } from 'react-native-svg';
 import { router, Stack, useLocalSearchParams, useNavigation, useRootNavigationState } from 'expo-router';
+import nodes from "./nodes_edges.json"
 import ImageCanvas from './Image_Canvas';
 import GraphComponent from './Graph';
 

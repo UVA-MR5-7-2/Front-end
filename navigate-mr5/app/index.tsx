@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Button, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { router, Stack, useLocalSearchParams, useNavigation } from 'expo-router';
 import { Picker } from '@react-native-picker/picker';
+import nodes from "./nodes_edges.json"
 
 export default function Index() {
 	// hide the expo header
@@ -16,8 +17,9 @@ export default function Index() {
 	const [selectedLocation, updateLocation] = useState(local.currentLocation || '');
 	const [selectedDestination, updateDestination] = useState('');
 
-	const locations = ['Select one', 'MR4 Entrance', 'MR6 Entrance', 'Pinn Hall Entrance', 'Lane Road Entrance', 'Atrium', 'Second floor entrance', 'First floor entrance', 'Labs entrance', 'Classroom', 'Restroom', 'BME Faculty Office'];
-	
+	const locations = Object.keys(nodes.nodes).sort();
+	locations.unshift("Select one");
+
 	const [errorMessage, setErrorMessage] = useState('');
 
 	// send the user to the graphing algorithm and handle poor inputs from the user
