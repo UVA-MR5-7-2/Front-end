@@ -2,12 +2,10 @@ var PriorityQueue = require("./priorityqueue");
 
 module.exports = dijkstra;
 
-var DEFAULT_WEIGHT_FUNC = _.constant(1);
-
-function dijkstra(g, source, weightFn, edgeFn) {
+function dijkstra(g, source, weightFn) {
   return runDijkstra(g, String(source),
-    weightFn || DEFAULT_WEIGHT_FUNC,
-    edgeFn || function(v) { return g.outEdges(v); });
+    weightFn,
+    v => g.outEdges(v));
 }
 
 function runDijkstra(g, source, weightFn, edgeFn) {
