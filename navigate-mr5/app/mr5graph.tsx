@@ -20,5 +20,5 @@ export default function mr5graph() {
 			graph.setEdge(name, connection, Math.sqrt(dx**2, dy**2));
 		}
 	}
-	console.log(graphlib.alg.dijkstra(graph, "Foyer", edge => graph.edge(edge)));
+	console.log(graphlib.alg.floydWarshall(graph, edge => graph.edge(edge)));
 }
