@@ -7,6 +7,14 @@ import nodes from "./nodes_edges.json"
 import ImageCanvas from './Image_Canvas';
 import GraphComponent from './Graph';
 
+function NodeList({nodes}) {
+	let components = [];
+	for (const node of nodes) {
+		components.push(<Text>node</Text>);
+	}
+	return components;
+}
+
 export default function Map() {
 	// hide the expo header
   const navigation = useNavigation();
@@ -40,6 +48,8 @@ export default function Map() {
 				{/*
       <ImageCanvas setNodes={setNodes} setGraph={setGraph} />
 				{graph && <GraphComponent nodes={nodes} graph={graph} />}*/}
+				
+			
 			<Svg height="1000" width="1000" viewBox="0 25 100 100">
 			  <Image
 					x="-12.5%"
@@ -50,6 +60,7 @@ export default function Map() {
 					clipPath="url(#clip)"
 				/>
 			</Svg>
+			
     </ScrollView>
   );
 }

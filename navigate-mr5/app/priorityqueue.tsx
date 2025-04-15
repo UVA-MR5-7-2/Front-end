@@ -1,6 +1,5 @@
-var _ = require("../lodash");
+var _ = require("./lodash").default;
 
-module.exports = PriorityQueue;
 
 /**
  * A min-priority queue data structure. This algorithm is derived from Cormen,
@@ -9,9 +8,11 @@ module.exports = PriorityQueue;
  * the queue. Adding and removing elements takes O(log n) time. A key can
  * have its priority decreased in O(log n) time.
  */
-function PriorityQueue() {
-  this._arr = [];
-  this._keyIndices = {};
+export default class PriorityQueue {
+	constructor() {
+		this._arr = [];
+		this._keyIndices = {};
+	}
 }
 
 /**

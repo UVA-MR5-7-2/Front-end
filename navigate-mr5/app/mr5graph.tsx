@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 var graphlib = require("graphlib");
 var Graph = graphlib.Graph;
-import nodes from "./nodes_edges.json"
+import nodes from "./nodes_edges.json";
+import dijkstra from "./dijkstra";
 
 export default function mr5graph() {
-	let graph = new Graph({ directed: true, compound: false, multigraph: false });
-	//graph.setLabel("mr5-graph");
+	let graph = new Graph({ directed: false, compound: false, multigraph: false });
 	for (const name in nodes.nodes) {
 		graph.setNode(name, nodes.nodes[name]);
 	}
@@ -20,5 +20,7 @@ export default function mr5graph() {
 			graph.setEdge(name, connection, Math.sqrt(dx**2, dy**2));
 		}
 	}
-	console.log(graphlib.alg.floydWarshall(graph, edge => graph.edge(edge)));
+	let inbetween_nodes = dijkstra(graph, "Foyer", edge => graph.edge(edge));
+	console.log(inbetween_nodes)
+	//return inbetween_nodes;
 }

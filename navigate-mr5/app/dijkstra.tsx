@@ -1,17 +1,17 @@
-var PriorityQueue = require("./priorityqueue");
+var PriorityQueue = require("./priorityqueue").default;
 
-module.exports = dijkstra;
-
-function dijkstra(g, source, weightFn) {
+export default function dijkstra(g, source, weightFn) {
   return runDijkstra(g, String(source),
     weightFn,
-    v => g.outEdges(v));
+    v => g.outEdges(v),
+		edge => g.outEdges(edge));
 }
 
 function runDijkstra(g, source, weightFn, edgeFn) {
   var results = {};
   var pq = new PriorityQueue();
   var v, vEntry;
+	let nodes = [];
 
   var updateNeighbors = function(edge) {
     var w = edge.v !== v ? edge.v : edge.w;
@@ -43,9 +43,11 @@ function runDijkstra(g, source, weightFn, edgeFn) {
     if (vEntry.distance === Number.POSITIVE_INFINITY) {
       break;
     }
-
+		nodes.push(v);
     edgeFn(v).forEach(updateNeighbors);
   }
+	
+	console.log(results, pq, v, vEntry, nodes);
 
-  return results;
+  return nodes;
 }
