@@ -52,6 +52,14 @@
             170,
             189
         ],
+        "Staircase 3": [
+            669,
+            1236
+        ],
+        "Staircase 4": [
+            1668,
+            1235
+        ],
         "Staircase 2": [
             1080,
             182
@@ -179,7 +187,8 @@
             "Shared Lab Space 1"
         ],
         "Shared Lab Space 1": [
-            "Kubelick Lab"
+            "Kubelick Lab",
+            "Classroom Student Lounge"
         ],
         "Kubelick Lab": [
             "Shared Lab Space 1",
@@ -194,7 +203,7 @@
             "Sheybani Lab"
         ],
         "Sheybani Lab": [
-            "Griffin Lab",
+            "French Lab",
             "Abebayehu Lab"
         ],
         "Abebayehu Lab": [
@@ -207,14 +216,27 @@
         ],
         "Christ Lab 2": [
             "Christ Lab 1",
-            "East Bathroom 1"
+            "East Bathroom 1",
+            "Staircase 3"
         ],
         "East Bathroom 1": [
-            "Christ Lab 2"
+            "Christ Lab 2",
+            "Staircase 3"
         ],
         "Staircase 1": [
             "Staircase 2",
             "Foyer"
+        ],
+        "Staircase 3": [
+            "Staircase 4",
+            "East Bathroom 1",
+            "Christ Lab 2"
+        ],
+        "Staircase 4": [
+            "Staircase 3",
+            "East Bathroom 2",
+            "Epstein Lab",
+            "Lazzara Lab 2"
         ],
         "Staircase 2": [
             "Staircase 1",
@@ -239,7 +261,8 @@
         ],
         "Library": [
             "Office",
-            "West Bathroom 2"
+            "West Bathroom 2",
+            "Atrium"
         ],
         "West Bathroom 2": [
             "Library",
@@ -340,16 +363,19 @@
         "Lazzara Lab 2": [
             "Lazzara Lab 1",
             "Epstein Lab",
-            "East Bathroom 2"
+            "East Bathroom 2",
+            "Staircase 4"
         ],
         "Epstein Lab": [
             "Blemker Lab",
             "Lazzara Lab 2",
-            "East Bathroom 2"
+            "East Bathroom 2",
+            "Staircase 4"
         ],
         "East Bathroom 2": [
             "Epstein Lab",
-            "Lazzara Lab 2"
+            "Lazzara Lab 2",
+            "Staircase 4"
         ]
     }
 }
