@@ -35,7 +35,7 @@ function graph(start, end) {
 	let path = [{coordinate: graph.node(end), name: end}];
 	let node = goals[end];
 	while (node.predecessor !== undefined) {
-		path.push({coordinate: graph.node(node.predecessor), name: node.predecessor});
+		path.unshift({coordinate: graph.node(node.predecessor), name: node.predecessor});
 		node = goals[node.predecessor];
 	}
 	return path;
@@ -76,7 +76,7 @@ export default function Map() {
 				<Text style={ styles.text }>Current Location: {location}</Text>
 				<Text style={ styles.text }>Destination: {destination}</Text>
 			</View>
-			<View style={{ flexDirection: 'row' }} >
+			<View style={{ top: -120, flexDirection: 'row', alignItems: 'center' }} >
 				<Svg height="1000" width="1000" viewBox='0 0 1273.5 886.5'>
 					<ClipPath id="clip" >
 						<Rect x="0" y="0" width="100%" height="100%" fill="red" />
@@ -90,8 +90,8 @@ export default function Map() {
 					/>
 					<Path d={'M ' + path.map(v => v.coordinate.map((w, i) => i ? w / 1.5 : w / 1.45).join(' ')).join(' ')} stroke='blue' strokeWidth='3' fill='none' />
 				</Svg>
-				<View style={{ flexDirection: 'column', top: 200 }} >
-					{path.map(v => <input type="checkbox" value={v.name}/>)}
+				<View style={{ flexDirection: 'column' }} >
+					{path.map((v, i) => <label><input type="checkbox"/> {i+1}. {v.name}</label>)}
 				</View>
 			</View>
     </ScrollView>
