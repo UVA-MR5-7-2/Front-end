@@ -1,7 +1,7 @@
 // import components we need from react and expo
 import { useEffect, useState } from 'react';
 import { Button, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
-import Svg, { Image, Path } from 'react-native-svg';
+import Svg, { ClipPath, Image, Path, Rect } from 'react-native-svg';
 import { router, Stack, useLocalSearchParams, useNavigation, useRootNavigationState } from 'expo-router';
 import nodes from "./nodes_edges.json"
 const graphlib = require("graphlib");
@@ -21,8 +21,8 @@ function graph(start, end) {
 		graph.setNode(name, nodes.nodes[name]);
 	}
 	for (const name in nodes.edges) {
-			const x1 = graph.node(name)[0];
-			const y1 = graph.node(name)[1];
+		const x1 = graph.node(name)[0];
+		const y1 = graph.node(name)[1];
 		for (const connection of nodes.edges[name]) {
 			const x2 = graph.node(connection)[0];
 			const y2 = graph.node(connection)[1];
@@ -64,6 +64,10 @@ export default function Map() {
 	}
 	
 	let path = graph(location, destination);
+	
+	let x = -Math.round(path.map(v => v.coordinate[0]).sort((a, b) => a-b)[0]);
+	console.log(x);
+	let y = -Math.round(path.map(v => v.coordinate[1]).sort((a, b) => a-b)[0]);
 
   return (
     <ScrollView contentContainerStyle={ styles.container }>
@@ -72,17 +76,24 @@ export default function Map() {
 				<Text style={ styles.text }>Current Location: {location}</Text>
 				<Text style={ styles.text }>Destination: {destination}</Text>
 			</View>
-			<Svg height="1100" width="1100" viewBox="0 15 100 100">
-			  <Image
-					x="-12.5%"
-					y="0"
-					width="125%"
-					height="125%"
-					href={require('./blueprint.png')}
-					clipPath="url(#clip)"
-				/>
-				<Path d={'M ' + path.map(v => v.coordinate.map((w, i) => Math.round(i ? w / 14 + 15 : w / 14 - 16)).join(' ')).join(' ')} stroke='blue' strokeWidth='0.3' fill='none' />
-			</Svg>
+			<View style={{ flexDirection: 'row' }} >
+				<Svg height="1000" width="1000" viewBox='0 0 1273.5 886.5'>
+					<ClipPath id="clip" >
+						<Rect x="0" y="0" width="100%" height="100%" fill="red" />
+					</ClipPath>
+					<Image
+						x={ 0 /* 2*x + 500 */ }
+						y={ 0 /* 2*y + 400 */ }
+						width={1273.5}
+						height='886.5'
+						href={require('./blueprint.png')}
+					/>
+					<Path d={'M ' + path.map(v => v.coordinate.map((w, i) => i ? w / 1.5 : w / 1.45).join(' ')).join(' ')} stroke='blue' strokeWidth='3' fill='none' />
+				</Svg>
+				<View style={{ flexDirection: 'column', top: 200 }} >
+					{path.map(v => <input type="checkbox" value={v.name}/>)}
+				</View>
+			</View>
     </ScrollView>
   );
 }
@@ -92,7 +103,6 @@ const styles = StyleSheet.create({
   container: {
 		flex: 1,
 		alignItems: "center",
-		gap: 30
 	},
   title: { 
 		fontSize: 40, 
