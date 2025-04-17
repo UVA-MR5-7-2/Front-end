@@ -12,6 +12,10 @@
             606,
             227
         ],
+        "Lab Door 1": [
+            606,
+            320
+        ],
         "Shared Lab Space 1": [
             633,
             455
@@ -95,6 +99,10 @@
         "Meyer Lab": [
             1649,
             230
+        ],
+        "Lab Door 2": [
+            1516,
+            307
         ],
         "Shared Lab Space 2": [
             1486,
@@ -180,15 +188,21 @@
         ],
         "West Bathroom 1": [
             "Foyer",
-            "Classroom Student Lounge"
+            "Classroom Student Lounge", 
+            "Lab Door 1"
         ],
         "Classroom Student Lounge": [
             "West Bathroom 1",
-            "Shared Lab Space 1"
+            "Lab Door 1"
+        ],
+        "Lab Door 1": [
+            "West Bathroom 1",
+            "Shared Lab Space 1",
+            "Classroom Student Lounge"
         ],
         "Shared Lab Space 1": [
             "Kubelick Lab",
-            "Classroom Student Lounge"
+            "Lab Door 1"
         ],
         "Kubelick Lab": [
             "Shared Lab Space 1",
@@ -267,32 +281,35 @@
         "West Bathroom 2": [
             "Library",
             "Papin Lab 1",
-            "Shared Lab Space 2"
+            "Lab Door 2"
         ],
         "Papin Lab 1": [
             "West Bathroom 2",
             "Meyer Lab",
-            "Shared Lab Space 2"
+            "Lab Door 2"
         ],
         "Meyer Lab": [
             "Papin Lab 1"
         ],
-        "Shared Lab Space 2": [
+        "Lab Door 2": [
             "West Bathroom 2",
-            "Papin Lab 2",
+            "Papin Lab 1",
+            "Shared Lab Space 2",
+            "Perice-Cottler Lab 2"
+        ],
+        "Shared Lab Space 2": [
+            "Lab Door 2",
             "Peirce-Cottler Lab 2",
-            "Saucerman Lab 1"
+            "Papin Lab 2"
         ],
         "Papin Lab 2": [
             "Shared Lab Space 2",
-            "Peirce-Cottler Lab 2",
             "Saucerman Lab 1",
             "Price Lab 1"
         ],
         "Peirce-Cottler Lab 2": [
-            "West Bathroom 2",
+            "Lab Door 2",
             "Shared Lab Space 2",
-            "Papin Lab 2",
             "Saucerman Lab 1"
         ],
         "Saucerman Lab 1": [
