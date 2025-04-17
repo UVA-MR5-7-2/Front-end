@@ -76,23 +76,21 @@ export default function Map() {
 				<Text style={ styles.text }>Current Location: {location}</Text>
 				<Text style={ styles.text }>Destination: {destination}</Text>
 			</View>
-			<View style={{ top: -120, flexDirection: 'row', alignItems: 'center' }} >
-				<Svg height="1000" width="1000" viewBox='0 0 1273.5 886.5'>
+			<View style={{ paddingBottom: 100, alignItems: 'center' }}>
+				<Svg height="400" width="400" viewBox='0 0 1910 1330'>
 					<ClipPath id="clip" >
 						<Rect x="0" y="0" width="100%" height="100%" fill="red" />
 					</ClipPath>
 					<Image
 						x={ 0 /* 2*x + 500 */ }
 						y={ 0 /* 2*y + 400 */ }
-						width={1273.5}
-						height='886.5'
+						width={1910}
+						height={1330}
 						href={require('./blueprint.png')}
 					/>
-					<Path d={'M ' + path.map(v => v.coordinate.map((w, i) => i ? w / 1.5 : w / 1.45).join(' ')).join(' ')} stroke='blue' strokeWidth='3' fill='none' />
+					<Path d={'M ' + path.map(v => v.coordinate.join(' ')).join(' ')} stroke='blue' strokeWidth='3' fill='none' />
 				</Svg>
-				<View style={{ flexDirection: 'column' }} >
-					{path.map((v, i) => <label><input type="checkbox"/> {i+1}. {v.name}</label>)}
-				</View>
+				{path.map((v, i) => <label><input type="checkbox"/> {i+1}. <Text>{v.name}</Text></label>)}
 			</View>
     </ScrollView>
   );
