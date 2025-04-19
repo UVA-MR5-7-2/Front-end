@@ -1,7 +1,7 @@
 // import components we need from react and expo
 import { useEffect, useState } from 'react';
 import { Button, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
-import { router, Stack, useLocalSearchParams, useNavigation } from 'expo-router';
+import { Link, router, Stack, useLocalSearchParams, useNavigation } from 'expo-router';
 import { Picker } from '@react-native-picker/picker';
 import nodes from "./nodes_edges.json"
 
@@ -13,12 +13,11 @@ export default function Index() {
   }, [navigation]);
 	
 	// variables for the user to choose their current location and destination
+	const locations = nodes.locations;
+	
 	const local = useLocalSearchParams();
-	const [selectedLocation, updateLocation] = useState(local.currentLocation || '');
+	const [selectedLocation, updateLocation] = useState((new URLSearchParams(window.location.search)).get("currentLocation") || locations[0]);
 	const [selectedDestination, updateDestination] = useState('');
-
-	const locations = Object.keys(nodes.nodes).sort();
-	locations.unshift("Select one");
 
 	const [errorMessage, setErrorMessage] = useState('');
 
@@ -33,7 +32,7 @@ export default function Index() {
 		} else if (locations.includes(selectedLocation) && locations.includes(selectedDestination) && selectedLocation !== locations[0] && selectedDestination !== locations[0]) {
 			router.push("/map?currentLocation=" + selectedLocation + "&destination=" + selectedDestination);
 		} else {
-			setErrorMessage("Something went wrong... :(");
+			setErrorMessage("Something went wrong... Try using MappedIn instead");
 			// Send error data to backend 
 		}
 	}
@@ -58,6 +57,7 @@ export default function Index() {
 				<Text style={ styles.buttonText }>Find</Text>
 			</Pressable>
 			<Text style={ styles.error }>{errorMessage}</Text>
+			<Link style={ styles.link } href='https://app.mappedin.com/map/67ec1aee0b03ee000b42fc80?floor=m_aa311d9bfff4adcb'>Try MappedIn</Link>
     </View>
   );
 }
@@ -106,4 +106,9 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		color: 'red'
 	},
+	link: {
+		color: '#2196F3',
+		fontSize: 20,
+		textDecorationLine: 'underline'
+	}
 });

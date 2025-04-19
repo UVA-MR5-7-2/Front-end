@@ -64,10 +64,6 @@ export default function Map() {
 	}
 	
 	let path = graph(location, destination);
-	
-	let x = -Math.round(path.map(v => v.coordinate[0]).sort((a, b) => a-b)[0]);
-	console.log(x);
-	let y = -Math.round(path.map(v => v.coordinate[1]).sort((a, b) => a-b)[0]);
 
   return (
     <ScrollView contentContainerStyle={ styles.container }>
@@ -76,22 +72,14 @@ export default function Map() {
 				<Text style={ styles.text }>Current Location: {location}</Text>
 				<Text style={ styles.text }>Destination: {destination}</Text>
 			</View>
-			<View style={{ paddingBottom: 100, alignItems: 'center' }}>
-				<Svg height="400" width="400" viewBox='0 0 1910 1330'>
-					<ClipPath id="clip" >
-						<Rect x="0" y="0" width="100%" height="100%" fill="red" />
-					</ClipPath>
-					<Image
-						x={ 0 /* 2*x + 500 */ }
-						y={ 0 /* 2*y + 400 */ }
-						width={1910}
-						height={1330}
-						href={require('./blueprint.png')}
-					/>
-					<Path d={'M ' + path.map(v => v.coordinate.join(' ')).join(' ')} stroke='blue' strokeWidth='3' fill='none' />
-				</Svg>
-				{path.map((v, i) => <label><input type="checkbox"/> {i+1}. <Text>{v.name}</Text></label>)}
-			</View>
+			<Svg height="400" width="400" viewBox='0 0 670 974'>
+				<ClipPath id="clip" >
+					<Rect x="0" y="0" width="100%" height="100%" fill="red" />
+				</ClipPath>
+				<Image x={0} y={0} width={670} height={974} href={ require('./map 1.png') } />
+				<Path d={'M ' + path.map(v => v.coordinate.join(' ')).join(' ')} stroke='black' strokeWidth='3' fill='none' />
+			</Svg>
+			{path.map((v, i) => <label style={ styles.largeText } ><input type="checkbox" id={ 'input-' + i } onInput={ () => { try {document.getElementById('input-' + (i+1)).disabled = false} catch(e){} } } disabled={ !!i } /> {i+1}. <Text style={ styles.largeText } >{v.name}</Text></label>)}
     </ScrollView>
   );
 }
@@ -111,4 +99,7 @@ const styles = StyleSheet.create({
 		margin: 10,
 		fontSize: 20
 	},
+	largeText: {
+		fontSize: 20
+	}
 });
