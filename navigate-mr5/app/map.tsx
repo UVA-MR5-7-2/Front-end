@@ -1,7 +1,7 @@
 // import components we need from react and expo
 import { useEffect, useState } from 'react';
 import { Button, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
-import Svg, { ClipPath, Image, Path, Rect } from 'react-native-svg';
+import Svg, { Image, Path, Rect } from 'react-native-svg';
 import { router, Stack, useLocalSearchParams, useNavigation, useRootNavigationState } from 'expo-router';
 import nodes from "./nodes_edges.json"
 const graphlib = require("graphlib");
@@ -72,12 +72,11 @@ export default function Map() {
 				<Text style={ styles.text }>Current Location: {location}</Text>
 				<Text style={ styles.text }>Destination: {destination}</Text>
 			</View>
-			<Svg height="400" width="400" viewBox='0 0 670 974'>
-				<ClipPath id="clip" >
-					<Rect x="0" y="0" width="100%" height="100%" fill="red" />
-				</ClipPath>
+			<Svg height="400" width="400" viewBox='0 0 1340 974'>
 				<Image x={0} y={0} width={670} height={974} href={ require('./map 1.png') } />
+				<Image x={670} y={0} width={670} height={974} href={ require('./map 2.png') } />
 				<Path d={'M ' + path.map(v => v.coordinate.join(' ')).join(' ')} stroke='black' strokeWidth='3' fill='none' />
+				<Rect x={ path[0].coordinate[0] - 5 } y={ path[0].coordinate[1] - 5 } width={10} height={10}  fill='black' />
 			</Svg>
 			{path.map((v, i) => <label style={ styles.largeText } ><input type="checkbox" id={ 'input-' + i } onInput={ () => { try {document.getElementById('input-' + (i+1)).disabled = false} catch(e){} } } disabled={ !!i } /> {i+1}. <Text style={ styles.largeText } >{v.name}</Text></label>)}
     </ScrollView>
