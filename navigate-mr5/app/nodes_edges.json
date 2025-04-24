@@ -99,13 +99,13 @@
 		"Peirce-Cottler Lab 1": [1106, 745],
 		"Peirce-Cottler Lab 1/Janes Lab 2": [1132, 745],
 		"Janes Lab 2": [1162, 745],
-		"Lazzara Lab 1/Blemker Lab": [1106, 783],
+		"Lazzara Lab 1/Blemker Lab": [1132, 783],
 		"Lazzara Lab 1": [1106, 783],
 		"Blemker Lab": [1162, 783],
-		"Lazzara Lab 2/Epstein Lab": [1103, 886],
+		"Lazzara Lab 2/Epstein Lab": [1132, 886],
 		"Lazzara Lab 2": [1103, 886],
 		"Epstein Lab": [1162, 886],
-		"Floor 2 South Lab Door": [1138, 916],
+		"Floor 2 South Lab Door": [1132, 916],
 		"Floor 2 South Bathroom": [1248, 916]
   },
   "edges": {
