@@ -7,15 +7,9 @@ import nodes from "./nodes_edges.json"
 const graphlib = require("graphlib");
 const Graph = graphlib.Graph;
 
-function NodeList({nodes}) {
-	let components = [];
-	for (const node of nodes) {
-		components.push(<Text>{node}</Text>);
-	}
-	return components;
-}
-
+// Create the graph and find a path
 function graph(start, end) {
+	// Graph creation using graphlib and JSON file of all the nodes and edges
 	let graph = new Graph({ directed: true, compound: false, multigraph: false });
 	for (const name in nodes.nodes) {
 		graph.setNode(name, nodes.nodes[name]);
@@ -31,6 +25,7 @@ function graph(start, end) {
 			graph.setEdge(name, connection, Math.sqrt(dx**2, dy**2));
 		}
 	}
+	// Use the built in dijkstra algorithm to find the path
 	let goals = graphlib.alg.dijkstra(graph, start, edge => graph.edge(edge));
 	let path = [{coordinate: graph.node(end), name: end}];
 	let node = goals[end];
@@ -53,6 +48,7 @@ export default function Map() {
 	const location = local.currentLocation;
 	const destination = local.destination;
 	
+	// Check if a valid location and destination exist in the URL
   const rootNavigationState = useRootNavigationState();
 	if (!rootNavigationState?.key) return null;
 	else {
@@ -63,8 +59,10 @@ export default function Map() {
 		}
 	}
 	
+	// Find a path
 	let path = graph(location, destination);
 
+	// create the layout of the app and dynamically create the path
   return (
     <ScrollView contentContainerStyle={ styles.container }>
 			<View>
